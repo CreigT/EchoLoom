@@ -75,6 +75,8 @@ class Project(BaseModel):
         }
     )
     package_type: str = "audiobook"
+    visibility: str = "private"
+    voice_consent: bool = False
     created_at: datetime = Field(default_factory=utcnow)
     updated_at: datetime = Field(default_factory=utcnow)
 
