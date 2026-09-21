@@ -17,6 +17,8 @@ class ProjectCreate(BaseModel):
     story: str = Field(min_length=20, max_length=20000)
     style_preferences: str = "warm memoir, cinematic pacing"
     package_type: str = "audiobook"
+    visibility: str = "private"
+    voice_consent: bool = False
 
 
 class ArtifactOut(BaseModel):
@@ -44,6 +46,8 @@ class ProjectOut(BaseModel):
     risk_flags: list[dict]
     gates: dict
     package_type: str
+    visibility: str
+    voice_consent: bool
     style_preferences: str
     raw_story: str
     artifacts: list[ArtifactOut]
