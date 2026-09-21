@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EchoLoom Studio</title>
+  <link rel="stylesheet" href="/assets/styles.css" />
+</head>
+<body>
+  <div class="grain"></div>
+  <header class="top">
+    <div class="brand">
+      <span class="mark">EL</span>
+      <div>
+        <strong>EchoLoom</strong>
+        <small>Story studio</small>
+      </div>
+    </div>
+    <div id="session" class="session">Not signed in</div>
+  </header>
+
+  <main class="layout">
+    <section class="panel submit">
+      <p class="eyebrow">Intake</p>
+      <h1>Give the swarm a story.</h1>
+      <p class="lede">Paste a memoir fragment, founder origin, or family recording transcript. Agents will brief, script, score risk, and wait for your approval before they produce audio.</p>
+
+      <form id="auth-form" class="row">
+        <input id="name" type="text" placeholder="Your name" required />
+        <button type="submit">Enter studio</button>
+      </form>
+
+      <form id="story-form" class="stack" hidden>
+        <input id="title" type="text" placeholder="Working title" required minlength="2" />
+        <select id="package">
+          <option value="audiobook">Audiobook</option>
+          <option value="podcast">Podcast episode</option>
+          <option value="legacy-short">Family legacy short</option>
+        </select>
+        <input id="style" type="text" value="warm memoir, cinematic pacing" />
+        <textarea id="story" required minlength="20" placeholder="The night the letters stopped, the recipe stayed in the drawer..."></textarea>
+        <button type="submit">Submit to Intake Agent</button>
+      </form>
+    </section>
+
+    <section class="panel board">
+      <p class="eyebrow">Live production</p>
+      <div class="board-head">
+        <h2 id="project-title">No active project</h2>
+        <span id="status-pill" class="pill">idle</span>
+      </div>
+      <div id="gates" class="gates"></div>
+      <div class="actions">
+        <button id="approve" type="button" disabled>Approve script</button>
+        <button id="refresh" type="button">Refresh</button>
+      </div>
+      <div id="flags" class="flags"></div>
+      <ol id="timeline" class="timeline"></ol>
+    </section>
+
+    <section class="panel artifacts">
+      <p class="eyebrow">Artifacts</p>
+      <div id="artifact-list" class="artifact-list">
+        <p class="muted">Scripts, stems, clearances, and masters will land here.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <span>Agents never skip rights or consent gates.</span>
+    <a href="/docs">API</a>
+  </footer>
+  <script src="/assets/app.js"></script>
+</body>
+</html>
