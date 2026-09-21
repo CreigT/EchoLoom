@@ -15,6 +15,7 @@ from app.api.schemas import (
     ProjectOut,
     TokenResponse,
 )
+from app.core.config import get_settings
 from app.models.domain import Event, Project
 from app.security.auth import create_token
 from app.services.store import store
@@ -37,6 +38,8 @@ def serialize(project: Project) -> ProjectOut:
         risk_flags=[f.model_dump() for f in project.risk_flags],
         gates=project.gates,
         package_type=project.package_type,
+        visibility=project.visibility,
+        voice_consent=project.voice_consent,
         style_preferences=project.style_preferences,
         raw_story=project.raw_story,
         artifacts=[
@@ -87,7 +90,14 @@ async def create_project(body: ProjectCreate, user: dict = Depends(current_user)
         raw_story=body.story,
         style_preferences=body.style_preferences,
         package_type=body.package_type,
+        visibility=body.visibility if body.visibility in {"private", "public"} else "private",
+        voice_consent=body.voice_consent,
     )
+    if get_settings().require_voice_consent and not project.voice_consent:
+        raise HTTPException(
+            status_code=422,
+            detail="Voice synthesis requires explicit consent before the swarm can produce audio.",
+        )
     await store.save(project)
     project = await orchestrator.start_project(project)
     return serialize(project)
