@@ -1,0 +1,18 @@
+services:
+  - type: web
+    name: echoloom
+    runtime: docker
+    healthCheckPath: /health
+    envVars:
+      - key: APP_ENV
+        value: production
+      - key: DATA_DIR
+        value: /app/data
+      - key: LLM_PROVIDER
+        value: mock
+      - key: APP_SECRET
+        generateValue: true
+    disk:
+      name: echoloom-data
+      mountPath: /app/data
+      sizeGB: 1
